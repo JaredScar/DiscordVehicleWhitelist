@@ -4,10 +4,13 @@
 
 --- Config ---
 
-roles = { -- Role(s) needed to bypass the Discord vehicle whitelist (be able to use the listed vehicles).
-    "Role1",
-    "Role2",
-    "Role3",
+--[[
+	REPLACE THE '1's WITH YOUR DISCORD ROLES' IDs
+]]
+-- THESE NEED TO BE THE RESPECTIVE ROLE IDs OF YOUR DISCORD ROLES:
+roleList = {
+1, -- Civ
+1, -- Trusted Civ
 }
 
 
@@ -16,21 +19,26 @@ roles = { -- Role(s) needed to bypass the Discord vehicle whitelist (be able to 
 RegisterServerEvent("FaxDisVeh:CheckPermission")
 AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
     local src = source
+	local allowedVehicles = {}
     for k, v in ipairs(GetPlayerIdentifiers(src)) do
         if string.sub(v, 1, string.len("discord:")) == "discord:" then
             identifierDiscord = v
         end
     end
-
+	-- TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, true, false)
     if identifierDiscord then
+		local roles = exports.discord_perms:GetRoles(src)
         for i = 1, #roles do
-            if exports.discord_perms:IsRolePresent(src, roles[i]) then
-                TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, true, false) -- They have perms DEV: (perms pass, err pass)
-            else
-                TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, false, false)
-            end
-        end
+			for j = 1, #roleList do
+				if roles[i] == roleList[j] then
+					-- Return the index back to the Client script
+					table.insert(allowedVehicles, j)
+				end
+			end
+		end
     elseif identifierDiscord == nil then
-        TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, false, true)
+		print("identifierDiscord == nil")
     end
+	-- Trigger client event
+	TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, allowedVehicles, true)
 end)
