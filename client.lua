@@ -53,13 +53,14 @@ Citizen.CreateThread(function()
 			local driver = GetPedInVehicleSeat(veh, -1)
 			-- Check if it has one of the restricted vehicles
 			local endLoop = false
-			requiredPerm = nil
+			local requiredPerm = nil
 			for i = 1, #restrictedVehicles do
 				for j = 1, #restrictedVehicles[i] do
 					if GetHashKey(restrictedVehicles[i][j]) == model then
 						-- It requires a permission
 						requiredPerm = i
 						endLoop = true
+						--TriggerEvent('chat:addMessage', {color = { 255, 0, 0}, multiline = true, args = {"Me", "Requires perm = " .. tostring(i)}}) -- TODO debug - get rid of
 						break
 					end
 				end
@@ -68,22 +69,20 @@ Citizen.CreateThread(function()
 				end
 			end
 			local hasPerm = false
-			if not requiredPerm == nil then
+			if requiredPerm ~= nil then
+				--TriggerEvent('chat:addMessage', {color = { 255, 0, 0}, multiline = true, args = {"Me", "RequiredPerm != nil"}}) -- TODO debug - get rid of
 				if has_value(allowedList, requiredPerm) then
+					--TriggerEvent('chat:addMessage', {color = { 255, 0, 0}, multiline = true, args = {"Me", "hasPerm = true"}}) -- TODO debug - get rid of
 					hasPerm = true
 				end
 			end
+			--TriggerEvent('chat:addMessage', {color = { 255, 0, 0}, multiline = true, args = {"Me", "Value of hasPerm = " .. tostring(hasPerm)}}) -- TODO debug - get rid of
 			-- If doesn't have permission, it's a restricted vehicle to them
-			if not hasPerm then
+			if not hasPerm and (requiredPerm ~= nil) then
 				if driver == ped then
-					for i = 1, #blacklistedVehicles do
-						local restrictedVehicleModel = GetHashKey(blacklistedVehicles[i])
-						if (model == restrictedVehicleModel) then
-							ShowInfo("~r~Restricted Vehicle Model.")
-							DeleteEntity(veh)
-							ClearPedTasksImmediately(ped)
-						end
-					end
+					ShowInfo("~r~Restricted Vehicle Model.")
+					DeleteEntity(veh)
+					ClearPedTasksImmediately(ped)
 				end
 			end
         end

@@ -9,7 +9,7 @@
 ]]
 -- THESE NEED TO BE THE RESPECTIVE ROLE IDs OF YOUR DISCORD ROLES:
 roleList = {
-1, -- Civ
+577626845504077876, -- PURPLE Role
 1, -- Trusted Civ
 }
 
@@ -28,13 +28,18 @@ AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
 	-- TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, true, false)
     if identifierDiscord then
 		local roles = exports.discord_perms:GetRoles(src)
-        for i = 1, #roles do
-			for j = 1, #roleList do
-				if roles[i] == roleList[j] then
-					-- Return the index back to the Client script
-					table.insert(allowedVehicles, j)
+		if not (roles == false) then
+			for i = 1, #roles do
+				for j = 1, #roleList do
+					print("roles[i] " .. tostring(roles[i]) .. " equal to roleList[j] " .. tostring(roleList[j]) .. " ? ")
+					if tonumber(roles[i]) == tonumber(roleList[j]) then
+						-- Return the index back to the Client script
+						table.insert(allowedVehicles, j)
+					end
 				end
 			end
+		else
+			print(GetPlayerName(src) .. " did not receive permissions because roles == false")
 		end
     elseif identifierDiscord == nil then
 		print("identifierDiscord == nil")
