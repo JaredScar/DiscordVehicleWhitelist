@@ -9,7 +9,7 @@
 ]]
 -- THESE NEED TO BE THE RESPECTIVE ROLE IDs OF YOUR DISCORD ROLES:
 roleList = {
-577626845504077876, -- PURPLE Role
+1, -- Civ
 1, -- Trusted Civ
 }
 
