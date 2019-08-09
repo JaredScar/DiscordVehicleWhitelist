@@ -10,7 +10,16 @@
 -- THESE NEED TO BE THE RESPECTIVE ROLE IDs OF YOUR DISCORD ROLES:
 roleList = {
 1, -- Civ
-1, -- Trusted Civ
+577968852852539392, -- Trusted Civ
+581159405022609409, -- FAA Heli
+581159505325457418, -- FAA Comm
+577662071865344040, -- Donator Vehicles
+506211283771719690, -- Player
+506213297389830162, -- Staff
+597419626183524353, -- Personal [Shared]
+577662226182176776, -- Personal
+506212543749029900, -- Admin
+506212786481922058, -- Owner
 }
 
 
@@ -31,7 +40,7 @@ AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
 		if not (roles == false) then
 			for i = 1, #roles do
 				for j = 1, #roleList do
-					print("roles[i] " .. tostring(roles[i]) .. " equal to roleList[j] " .. tostring(roleList[j]) .. " ? ")
+					--print("roles[i] " .. tostring(roles[i]) .. " equal to roleList[j] " .. tostring(roleList[j]) .. " ? ")
 					if tonumber(roles[i]) == tonumber(roleList[j]) then
 						-- Return the index back to the Client script
 						table.insert(allowedVehicles, j)
