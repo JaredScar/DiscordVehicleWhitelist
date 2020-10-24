@@ -3,19 +3,6 @@
 ------------------------------------------------
 
 --- Config ---
---[[
-1, -- Civ
-1, -- Trusted Civ
-1, -- FAA Heli
-1, -- FAA Comm
-1, -- Donator Vehicles
-1, -- Player
-1, -- Staff
-1, -- Personal [Shared]
-1, -- Personal
-1, -- Admin
-1, -- Owner
-]]--
 restrictedVehicles = {
 {}, -- This relates to the first item in the roleList (Civ)
 {
