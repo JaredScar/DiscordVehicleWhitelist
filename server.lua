@@ -4,24 +4,20 @@
 
 --- Config ---
 
---[[
-	REPLACE THE '1's WITH YOUR DISCORD ROLES' IDs
-]]
--- THESE NEED TO BE THE RESPECTIVE ROLE IDs OF YOUR DISCORD ROLES:
+-- THESE NEED TO BE THE RESPECTIVE ROLE LABELS AS LABELED IN Badger_Discord_API:
 roleList = {
-1, -- Civ
-577968852852539392, -- Trusted Civ
-581159405022609409, -- FAA Heli
-581159505325457418, -- FAA Comm
-577662071865344040, -- Donator Vehicles
-506211283771719690, -- Player
-506213297389830162, -- Staff
-597419626183524353, -- Personal [Shared]
-577662226182176776, -- Personal
-506212543749029900, -- Admin
-506212786481922058, -- Owner
+"", -- Civ
+"Trusted_Civ", -- Trusted Civ
+"FAA_Heli", -- FAA Heli
+"FAA_Comm", -- FAA Comm
+"Donator_Vehicles", -- Donator Vehicles
+"Player", -- Player
+"Staff", -- Staff
+"Personal_[Shared]", -- Personal [Shared]
+"Personal", -- Personal
+"Admin", -- Admin
+"Owner", -- Owner
 }
-
 
 --- Code ---
 
@@ -36,13 +32,11 @@ AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
     end
 	-- TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, true, false)
     if identifierDiscord then
-		local roles = exports.discord_perms:GetRoles(src)
-		if not (roles == false) then
-			for i = 1, #roles do
+		local roleIDs = exports.Badger_Discord_API:GetDiscordRoles(src)
+		if not (roleIDs == false) then
+			for i = 1, #roleIDs do
 				for j = 1, #roleList do
-					--print("roles[i] " .. tostring(roles[i]) .. " equal to roleList[j] " .. tostring(roleList[j]) .. " ? ")
-					if tonumber(roles[i]) == tonumber(roleList[j]) then
-						-- Return the index back to the Client script
+					if exports.Badger_Discord_API:CheckEqual(roleList[j], roleIDs[i]) then
 						table.insert(allowedVehicles, j)
 					end
 				end
