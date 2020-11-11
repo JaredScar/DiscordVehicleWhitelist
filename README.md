@@ -1,6 +1,12 @@
 # DiscordVehiclesRestrict (DiscordVehicleWhitelist by FAXES)
 ## Continued Documentation
 https://docs.badger.store/fivem-discord-scripts/discordvehiclesrestrict
+
+## For all your hosting needs:
+![Iceline Hosting](https://i.gyazo.com/24c65c27acc53ce0656cda7e7ed29230.gif)
+
+### Use code `BADGER15` at https://iceline-hosting.com/billing/aff.php?aff=284 for `15% off` your first month of any service (excluding dedicated servers)
+
 ## Discontinued Documentation
 This is a Discord Vehicle Restriction script that restricts vehicles to certain roles with discord. This idea came about because of FAXES DiscordVehicleWhitelist. I have gotten permission from FAXES to add onto his script and make it possible to restrict vehicle use to only certain roles within Discord.
 
