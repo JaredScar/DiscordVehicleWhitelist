@@ -294,10 +294,6 @@ restrictedVehicles = {
 "voltic2",
 "scramjet",
 }, -- Admin
-{
-"amggts",
-"evoque",
-}, -- Owner
 }
 
 --- Code ---

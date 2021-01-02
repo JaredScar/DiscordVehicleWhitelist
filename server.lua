@@ -16,10 +16,10 @@ roleList = {
 "Personal_[Shared]", -- Personal [Shared]
 "Personal", -- Personal
 "Admin", -- Admin
-"Owner", -- Owner
 }
 
 bypassRoleList = {
+"Owner", -- Owner
 }
 
 --- Code ---
