@@ -298,6 +298,10 @@ restrictedVehicles = {
 
 --- Code ---
 
+AddEventHandler('playerSpawned', function()
+    TriggerServerEvent("FaxDisVeh:CheckPermission", source)
+end)
+
 AddEventHandler('onResourceStart', function()
     TriggerServerEvent("FaxDisVeh:CheckPermission", source)
 end)
