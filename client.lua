@@ -294,17 +294,16 @@ restrictedVehicles = {
 "voltic2",
 "scramjet",
 }, -- Admin
-{
-"amggts",
-"evoque",
-}, -- Owner
 }
 
 --- Code ---
 
 AddEventHandler('playerSpawned', function()
-    local src = source
-    TriggerServerEvent("FaxDisVeh:CheckPermission", src)
+    TriggerServerEvent("FaxDisVeh:CheckPermission", source)
+end)
+
+AddEventHandler('onResourceStart', function()
+    TriggerServerEvent("FaxDisVeh:CheckPermission", source)
 end)
 
 allowedList = {}
@@ -319,7 +318,7 @@ end)
 
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
-        if value == val then
+        if value == val or value == 0 then
             return true
         end
     end
