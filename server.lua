@@ -25,6 +25,7 @@ RegisterServerEvent("FaxDisVeh:CheckPermission")
 AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
     local src = source
 	local allowedVehicles = {}
+	local hasError = false
     for k, v in ipairs(GetPlayerIdentifiers(src)) do
         if string.sub(v, 1, string.len("discord:")) == "discord:" then
             identifierDiscord = v
@@ -45,8 +46,8 @@ AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
 			print(GetPlayerName(src) .. " did not receive permissions because roles == false")
 		end
     elseif identifierDiscord == nil then
-		print("identifierDiscord == nil")
+		hasError = true
     end
 	-- Trigger client event
-	TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, allowedVehicles, true)
+	TriggerClientEvent("FaxDisVeh:CheckPermission:Return", src, allowedVehicles, hasError)
 end)
