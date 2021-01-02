@@ -319,7 +319,7 @@ end)
 
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
-        if value == val then
+        if value == val or value == 0 then
             return true
         end
     end

@@ -19,6 +19,9 @@ roleList = {
 "Owner", -- Owner
 }
 
+bypassRoleList = {
+}
+
 --- Code ---
 
 RegisterServerEvent("FaxDisVeh:CheckPermission")
@@ -35,7 +38,18 @@ AddEventHandler("FaxDisVeh:CheckPermission", function(_source)
     if identifierDiscord then
 		local roleIDs = exports.Badger_Discord_API:GetDiscordRoles(src)
 		if not (roleIDs == false) then
-			for i = 1, #roleIDs do
+			local endLoop = false
+			for i = 1, #roleIDs do				
+				for j = 1, #bypassRoleList do
+					if exports.Badger_Discord_API:CheckEqual(bypassRoleList[j], roleIDs[i]) then
+						table.insert(allowedVehicles, 0)
+						endLoop = true
+						break
+					end
+				end
+				if endLoop then
+					break
+				end
 				for j = 1, #roleList do
 					if exports.Badger_Discord_API:CheckEqual(roleList[j], roleIDs[i]) then
 						table.insert(allowedVehicles, j)
